@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
+// Import components
+import Button from '../common/Button';
 
 class HomePage extends Component {
   render() {
-    return <h1>Hello World!</h1>;
+    return <Button>Hello World!</Button>;
   }
 }
 
