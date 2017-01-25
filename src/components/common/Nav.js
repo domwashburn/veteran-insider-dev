@@ -4,7 +4,7 @@ import {Link, IndexLink} from 'react-router';
 const Nav = (/*{ desructure props here }*/) => {
   return (
     <nav>
-      <IndexLink to="/" activeClassName="active">Home</IndexLink>
+      <IndexLink to="/" activeClassName="active">Veteran Insider</IndexLink>
     </nav>
   );
 };
