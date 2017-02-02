@@ -1,0 +1,40 @@
+@mixin rotate($direction) {
+  @if $direction == "up" {
+    transform: rotate(0deg);
+  }
+  @if $direction == "up-right" {
+    transform: rotate(45deg);
+  }
+  @if $direction == "right" {
+    transform: rotate(90deg);
+  }
+  @if $direction == "down-right" {
+    transform: rotate(135deg);
+  }
+  @if $direction == "down" {
+    transform: rotate(180deg);
+  }
+  @if $direction == "down-left" {
+    transform: rotate(-135deg);
+  }
+  @if $direction == "left" {
+    transform: rotate(-90deg);
+  }
+  @if $direction == "up-left" {
+    transform: rotate(-45deg);
+  }
+}
+
+@mixin layer($layer-number) {
+  z-index: layer($layer-number);
+}
+
+@mixin font-weight-style($weight: null, $italic: true) {
+  @if $weight != null {font-weight: weight($weight)};
+  @if $italic and $weight != null {
+     &-italic {
+      @if $weight != null {font-weight: weight($weight)};
+      font-style: italic;
+    }
+  };
+}

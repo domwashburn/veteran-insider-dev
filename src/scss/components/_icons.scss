@@ -1,0 +1,191 @@
+[class^="icon"].is-active {
+    cursor: pointer;
+}
+[class^="icon"].is-inactive {
+    cursor: default;
+}
+
+[class^="icon"]:focus {
+    outline: none;
+}
+
+.icon {
+    &--center-vert-parent {
+        position: relative;
+        display: inline;
+        & + * {
+            margin-left: 1.5em;
+        }
+    }
+    &--center-vert {
+        position: absolute;
+        bottom: 50%;
+        transform: translateY(50%);
+    }
+    &--block {
+        display: block;
+    }
+    &--inline-block {
+        display: inline-block;
+    }
+    // sizing
+    &--text-relative {
+        height: 1.2em;
+    }
+    &--xs {
+        height: to-unit(8px, "rem");
+    }
+    &--sm {
+        height: px-rem( 12);
+    }
+    &--md {
+        height: px-rem( 16);
+    }
+    &--lg {
+        height: px-rem( 24);
+    }
+    &--xl {
+        height: px-rem( 27);
+    }
+    &--xxl {
+        height: px-rem(30.6);
+    }
+    &--fluid {
+        height: 100%;
+    }
+}
+
+// ------------------------------------------------------------
+//   Separating UI color themes from the layout and structure
+//   of the components. This lives outside of the base
+//   component because there"s no & inherritance. The class
+//   names referenced are created above and themed below. By
+//   making the parent class the UI theme, it can be on any
+//   element as long as it"s a parent of the component.
+// ------------------------------------------------------------
+
+.light-ui {
+    [class^="icon"].is-active,
+    &[class^="icon"].is-active {
+        fill: palette("light-ui", "active");
+        transition: fill 300ms $transition-snappy, opacity 300ms $transition-snappy;
+        &:hover {
+            fill: palette("light-ui", "focus");
+        }
+    }
+    [class^="icon"].is-inactive,
+    &[class^="icon"].is-inactive,
+    [class^="icon"]:hover.is-inactive,
+    &[class^="icon"]:hover.is-inactive {
+        fill: palette("light-ui", "inactive");
+    }
+}
+.dark-ui {
+    [class^="icon"].is-active,
+    &[class^="icon"].is-active {
+        fill: palette("dark-ui", "active");
+        transition: fill 300ms $transition-snappy, opacity 300ms $transition-snappy;
+        &:hover {
+            fill: palette("dark-ui", "focus");
+        }
+    }
+    [class^="icon"].is-inactive,
+    &[class^="icon"].is-inactive,
+    [class^="icon"]:hover.is-inactive,
+    &[class^="icon"]:hover.is-inactive {
+        fill: palette("dark-ui", "inactive");
+    }
+}
+
+// -------------------------------------------------
+//   Below are styles for specific icons.
+// -------------------------------------------------
+
+// By default, arrows and chevron SVGs should be pointing up for this to work, another way to accomplish the would be to use cardinal directions (north, south, east, west) this gives the ability to use north-west, south-east, etc to describe the direction the arrow is pointing.
+
+.arrow {
+    &--left { @include rotate(left); }
+    &--right { @include rotate(right); }
+    &--down { @include rotate(down); }
+}
+
+.icon--sort {
+    width: to-unit(12px, "rem");
+    &__top {
+        .sort-up.is-active & {
+            opacity: 0.4;
+        }
+    }
+    &__bottom {
+        .sort-down.is-active & {
+            opacity: 0.4;
+        }
+    }
+}
+
+& .icon--accordion {
+    &.is-closed {
+      transition: transform 300ms $transition-snappy;
+      @include rotate(right);
+    }
+    &.is-open {
+      transition: transform 200ms cubic-bezier(0.15, 0.93, 0.73, 1.04);
+      @include rotate(down);
+    }
+}
+
+// ------------------------------------------------------------
+//   Separating UI color themes from the layout and structure
+//   of the components. This lives outside of the base
+//   component because there"s no & inherritance. The class
+//   names referenced are created above and themed below. By
+//   making the parent class the UI theme, it can be on any
+//   element as long as it"s a parent of the component.
+// ------------------------------------------------------------
+
+.light-ui {
+    // [class^="icon"],
+    // &[class^="icon"] {
+    //     fill: palette("light-ui", "active");
+    // }
+    [class^="icon"].is-active,
+    &[class^="icon"].is-active {
+        fill: palette("light-ui", "active");
+        transition: fill 300ms $transition-snappy, opacity 300ms $transition-snappy;
+        &:hover {
+            fill: palette("light-ui", "focus");
+        }
+    }
+    [class^="icon"].is-inactive,
+    &[class^="icon"].is-inactive,
+    [class^="icon"]:hover.is-inactive,
+    &[class^="icon"]:hover.is-inactive {
+        fill: palette("light-ui", "inactive");
+    }
+
+    .icon {
+        &--info {
+            fill: palette("light-ui", "info");
+        }
+    }
+}
+.dark-ui {
+    [class^="icon"],
+    &[class^="icon"] {
+        fill: palette("dark-ui", "active");
+    }
+    [class^="icon"].is-active,
+    &[class^="icon"].is-active {
+        fill: palette("dark-ui", "active");
+        transition: fill 300ms $transition-snappy, opacity 300ms $transition-snappy;
+        &:hover {
+            fill: palette("dark-ui", "focus");
+        }
+    }
+    [class^="icon"].is-inactive,
+    &[class^="icon"].is-inactive,
+    [class^="icon"]:hover.is-inactive,
+    &[class^="icon"]:hover.is-inactive {
+        fill: palette("dark-ui", "inactive");
+    }
+}

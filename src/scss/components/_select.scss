@@ -1,0 +1,364 @@
+@mixin select() {
+	display: -webkit-flex;
+	display: inline-flex;
+	cursor: pointer;
+	position: relative;
+	overflow: visible;
+  align-content: center;
+  height: 100%;
+}
+
+.select {
+	@include select();
+	&:focus{
+		outline: default;
+	}
+	&__text {
+		@include select();
+		text-decoration: none;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		border: 0;
+		font-weight: 300;
+		text-align: left;
+		max-width: to-unit(250px, "rem");
+		flex-basis: to-unit(250px, "rem");
+		flex: 1;
+		height: to-unit(50px, "rem");
+	}
+	// --------------------------
+	// select pop-over directions
+	// --------------------------
+	&--up {
+		flex-direction: column-reverse;
+	}
+	&--down {
+		flex-direction: column;
+	}
+	&--left {
+		flex-direction: row-reverse;
+	}
+	&--right {
+		flex-direction: row;
+	}
+
+	&__button--icon {
+		padding: 1em;
+		border-width: 0;
+		// hard coding this may not be idea... clean up the width/height below
+		width: to-unit(65px, "rem");
+		height: to-unit(65px, "rem");
+		justify-content: center;
+	}
+	&__open-icon {
+		width: 13px;
+		height: 8px;
+		align-items: center;
+		transition: all .3s cubic-bezier(.5, .08, 0, 1);
+		fill: currentColor;
+		@include rotate("down");
+		.is-open & {
+			@include rotate("up");
+		}
+		.select--inline & {
+			align-items: center;
+		}
+	}
+	&__option-list {
+		margin: 0;
+		padding: 0;
+		//This is set as the default, but can be altered based on height. There is a relational one in the javascript section.
+		transition: height 0.2s cubic-bezier(.5, .08, 0, 1);
+		// height: 0px;
+		overflow-y: scroll;
+		list-style: none;
+		position: absolute;
+		z-index: 100;
+		max-height:700px;
+		height: 0;
+		width: 100%;
+
+		top: 100%;
+		.select--up & {
+			display: -webkit-flex;
+			display: flex;
+			flex-direction: column-reverse;
+		}
+		.select--down & {
+			display: -webkit-flex;
+			display: flex;
+
+			flex-direction: column;
+		}
+		.select--left & {
+			display: -webkit-flex;
+			display: flex;
+
+			flex-direction: row-reverse;
+		}
+		.select--right & {
+			display: -webkit-flex;
+			display: flex;
+			flex-direction: row;
+		}
+		.is-open &{
+			transition: height 0.2s cubic-bezier(.5, .08, 0, 1);
+		}
+		.is-open &.shadow {
+			box-shadow: 0px 3px 4px 1px rgba(0, 0, 0, 0.20);
+		}
+		&--icons {
+
+		}
+	}
+	&__option-text:not(:only-child) {
+		margin-bottom: to-unit(10px, "rem");
+	}
+	&__option-text, &__option-sub {
+		display: block;
+		width: 100%;
+		overflow: hidden;
+		text-overflow: word-wrap;
+	}
+	// styling for options in the dropdown
+	// &__button, &__option {
+	// }
+
+	&__option-search {
+		padding: 0;
+		.form__input {
+			padding: to-unit(18px, "rem") to-unit(16px, "rem");
+		}
+	}
+
+	&__option {
+		display: flex;
+		align-items: center;
+		// flex-basis: 45px;
+		&--selected {
+			position: relative;
+
+			&:before {
+				position: absolute;
+				transition: all 0.2s ease-out;
+		        content: " ";
+		        display: block;
+				width: 4px;
+				height: 100%;
+			}
+		}
+		// lines between items, only in select because these styles are being used in the user menu
+		.select &:not(:first-child)  {
+		}
+	}
+	&__option {
+		cursor: pointer;
+		outline: none;
+		border: 0;
+		// background: transparent;
+		width: 100%;
+		text-align: left;
+		padding: to-unit(18px, "rem") to-unit(16px, "rem");
+		display: block;
+		text-decoration: none;
+
+		transition: fill 350ms ease-out, background-color 300ms ease-out;
+
+		.select--icon & {
+			padding: .8em;
+			height: to-unit(65px, "rem");
+			width: to-unit(65px, "rem");
+			text-align: center;
+		}
+		&:hover {
+			transition: fill 250ms ease-out, background-color 200ms ease-out;
+			.select--icon & {
+			}
+		}
+		&:active {
+			transition: fill 150ms ease-out, background-color 200ms ease-out;
+			.select--icon & {
+			}
+		}
+	}
+	// search/filter text field styling
+	// &__text-input {
+
+	// }
+
+}
+
+.hidden-field {
+	display: none;
+	height: 0;
+	width: 0;
+	opacity: 0;
+}
+
+// ------------------------------------------------------------
+//   Separating UI color themes from the layout and structure
+//   of the components. This lives outside of the base
+//   component to make theming components easier. The class
+//   names referenced are created above and themed below. By
+//   making the parent class the UI theme, it can be on any
+//   element as long as it"s a parent of the component.
+// ------------------------------------------------------------
+
+.light-ui {
+	.select__button, .select__button--icon {
+		color: palette("light-ui", "active");
+		fill: palette("light-ui", "active");
+		background-color: transparent;
+		border-color: palette("light-ui", "active");
+		&:hover, &:active {
+			background-color: palette("light-ui", "focus");
+			border-color: palette("light-ui", "focus");
+			color: palette("light-ui", "bg-light");
+			fill: palette("light-ui", "bg-light");
+		}
+	}
+	& .is-open .select__button, & .is-open .select__button--icon {
+		background-color: palette("light-ui", "active");
+		border-color: palette("light-ui", "active");
+		color: palette("light-ui", "bg-light");
+		fill: palette("light-ui", "bg-light");
+		&:hover, &:active {
+			background-color: palette("light-ui", "focus");
+			border-color: palette("light-ui", "focus");
+		}
+	}
+	// Because of selector specificity colors and transitions need to be redefined.
+	.select--fill {
+		.select__button, .select__button--icon  {
+			background-color: transparent;
+			&:hover, &:active {
+				background-color: palette("light-ui", "focus");
+			}
+		}
+		&.is-open .select__button, &.is-open .select__button--icon {
+			background-color: palette("light-ui", "active");
+			&:hover, &:active {
+				background-color: palette("light-ui", "focus");
+			}
+		}
+	}
+	.select--inline {
+		.select__button, .select__button--icon {
+			background-color: initial;
+			color: palette("light-ui", "active");
+			border-bottom: 3px solid palette("light-ui", "active");
+			&:hover, &:focus {
+			  color: palette("light-ui", "focus");
+			  border-bottom: 3px solid palette("light-ui", "focus");
+			}
+		}
+		&.is-open .select__button, &.is-open .select__button--icon {
+			color: palette("light-ui", "active");
+			border-bottom: 3px solid palette("light-ui", "active");
+		}
+	}
+	.select__open-icon {
+		fill: currentColor;
+	}
+
+	.select__option {
+		color: palette("light-ui", "text");
+		background-color: palette("secondary", "light");
+		&:hover, &:active {
+			color: palette("light-ui", "active");
+			background-color: #FFFFFF;
+			.select--icon & {
+				fill: palette("light-ui", "active");
+			}
+		}
+	}
+
+	.select__option-sub, &__option:hover &__option-sub {
+		color: color("gray", 50); // TO DO: add this to the color palette map...
+	}
+}
+
+
+.dark-ui {
+	.select__button, .select__button--icon {
+		color: palette("dark-ui", "active");
+		fill: palette("dark-ui", "active");
+		background-color: transparent;
+		border-color: palette("dark-ui", "active");
+		&:hover, &:active {
+			background-color: palette("dark-ui", "focus");
+			border-color: palette("dark-ui", "focus");
+			color: palette("dark-ui", "bg-darker");
+			fill: palette("dark-ui", "bg-darker");
+		}
+	}
+	& .is-open .select__button, & .is-open .select__button--icon {
+		background-color: palette("dark-ui", "active");
+		border-color: palette("dark-ui", "active");
+		color: palette("dark-ui", "bg-darker");
+		fill: palette("dark-ui", "bg-darker");
+		&:hover, &:active {
+			background-color: palette("dark-ui", "focus");
+			border-color: palette("dark-ui", "focus");
+		}
+	}
+	// Because of selector specificity colors and transitions need to be redefined.
+	.select--fill {
+		.select__button, .select__button--icon  {
+			background-color: transparent;
+			&:hover, &:active {
+				background-color: palette("dark-ui", "focus");
+			}
+		}
+		&.is-open .select__button, &.is-open .select__button--icon {
+			background-color: palette("dark-ui", "active");
+			&:hover, &:active {
+				background-color: palette("dark-ui", "focus");
+			}
+		}
+	}
+	.select--inline {
+		.select__button, .select__button--icon {
+			background-color: initial;
+			color: palette("dark-ui", "active");
+			border-bottom: 3px solid palette("dark-ui", "active");
+			&:hover, &:focus {
+			  color: palette("dark-ui", "focus");
+			  border-bottom: 3px solid palette("dark-ui", "focus");
+			}
+		}
+		&.is-open .select__button, &.is-open .select__button--icon {
+			color: palette("dark-ui", "active");
+			border-bottom: 3px solid palette("dark-ui", "active");
+			&:hover, &:focus {
+			  color: palette("dark-ui", "focus");
+			  border-bottom: 3px solid palette("dark-ui", "focus");
+			}
+		}
+	}
+	.select__open-icon {
+		fill: currentColor;
+	}
+	.select__option {
+		&--selected {
+			&:before {
+			}
+		}
+		// lines between items
+		// .select &:not(:first-child)  {
+		// 	border-top: 1px solid palette("light-ui", "active");
+		// }
+	}
+
+	.select__option {
+		color: palette("dark-ui", "text");
+		background-color: color("blue", 70);
+		&:hover, &:active {
+			color: palette("dark-ui", "focus");
+			background-color: palette("dark-ui", "bg-darker");
+			.select--icon & {
+				fill: palette("dark-ui", "active");
+			}
+		}
+	}
+}

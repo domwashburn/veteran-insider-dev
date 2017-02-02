@@ -1,0 +1,94 @@
+[ui-id="butterfly-home"] * {
+	box-sizing: border-box;
+}
+.match-manage {
+    display: flex;
+    flex-flow: column nowrap;
+    flex: 1;
+}
+.butterfly__content {
+  display: flex;
+  flex-direction: row;
+  height: calc( 100vh - 149px); // this should be dynamically calculated in the JS
+  overflow: 100%;
+}
+
+.visible {
+  display: block;
+}
+
+.is-hidden {
+  opacity: 0;
+  width: 0;
+  position: absolute;
+  transform: translateX( -100% );
+  transition: opacity 250ms 200ms ease-out, z-index 100ms 550ms ease-out;
+  // height 200ms 250ms ease-out, left 200ms ease-out;
+  // animation: hide-content 350ms ease-out;
+}
+.is-invisible {
+  // animation: make-invisible 550ms 200ms ease-out;
+  opacity: 0;
+  // z-index: -10;
+  transition: opacity 350ms ease-out, z-index 100ms 550ms ease-out;
+}
+.is-visible {
+  // animation: make-visible 250ms ease-out;
+  opacity: 1;
+  transition: opacity 550ms ease-out;
+}
+
+.is-hidden {
+  visibility: hidden !important;
+  height: 0;
+  width: 0;
+}
+
+@keyframes make-invisible {
+  0% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 0;
+  }
+  100% {
+    z-index: -10;
+  }
+}
+
+@keyframes make-visible {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hide-content {
+  0% { position: relative; opacity: 1; }
+  90% { opacity: 0; }
+  100% { }
+}
+
+// .clear--fix__inline {
+//   clear: both;
+//   display: inline;
+// }
+
+// .clear--fix {
+//   clear: both;
+// }
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}
+.clearfix {
+  @include clearfix;
+}

@@ -1,0 +1,51 @@
+.main-header {
+    // positioning
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-self: center;
+    // visual styling
+    height: to-unit(75px, "rem");
+    background-color: palette("dark-ui", "bg-darker");
+    padding: 0 0 0 to-unit(30px, "rem");
+    // width: 100%;
+    min-height: to-unit(75px, "rem");
+    &__title {
+        // text-align: center;
+    }
+    &__hgroup {
+        flex: 1;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        padding: 0 to-unit(20px, "rem");
+    }
+    &__actions {
+        height: 100%;
+        display: flex;
+    }
+}
+
+.plugin-nav {
+    padding: 0 to-unit(30px, "rem");
+}
+
+.light-ui {
+    .main-header, &.main-header, .plugin-nav, &.plugin-nav {
+        background-color: palette("light-ui", "bg-light");
+        border-top: 1px solid palette("secondary", "light");
+    }
+    .plugin-nav {
+        border-bottom: 1px solid palette("secondary", "light");
+    }
+}
+
+.dark-ui {
+    .main-header, &.main-header {
+        background-color: palette("dark-ui", "bg-darker");
+        border: 0;
+    }
+    .plugin-nav, &.plugin-nav {
+        background-color: palette("dark-ui", "bg-dark");
+        border: 0;
+    }
+}

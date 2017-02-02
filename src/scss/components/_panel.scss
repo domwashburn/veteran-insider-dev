@@ -1,0 +1,29 @@
+.panel {
+	width: 400px;
+	height: 100%;
+	overflow: hidden;
+	opacity: 0;
+	border-top: 0;
+	border-bottom: 0;
+	border-left: 0;
+	border-radius: 0;
+	margin-bottom: 0;
+	transition: width 300ms $transition-snappy,
+				opacity 500ms $transition-snappy;
+	.is-open {
+		transition: width 300ms $transition-snappy,
+					opacity 500ms $transition-snappy;
+	}
+}
+
+.light-ui {
+	.panel {
+		background-color: palette("light-ui", "bg-light");
+		&--left {
+			border-right: 1px solid palette("secondary", "light");
+		}
+		&--right {
+			border-left: 1px solid palette("secondary", "light");
+		}
+	}
+}

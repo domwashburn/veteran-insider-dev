@@ -1,0 +1,122 @@
+  // --------------------- //
+ //     Math-y Stuff      //
+// --------------------- //
+
+//  pow()
+//  calculates the power of a number using a positive or negative exponent.
+//  decimal values aren't currently supported.
+//
+//  $number: A numeric value, without a unit.
+//  $exponent: A positive or negative integer used to calculate the power of $number.
+
+
+@function pow($number, $exponent) {
+  $value: 1;
+
+  @if $exponent > 0 {
+    @for $i from 1 through $exponent {
+      $value: $value * $number;
+    }
+  } @else if $exponent < 0 {
+    @for $i from 1 through -$exponent {
+      $value: $value / $number;
+    }
+  }
+  @return $value;
+}
+
+  // ------------------------ //
+ //  Measurement Conversion  //
+// ------------------------ //
+
+//  strip-unit()
+//  This function takes a measurement and returns the numeric value without a unit.
+//
+//  $value: a numeric value, with or without a unit, and the desired unit.
+
+@function strip-unit($value) {
+  @if type-of($value) == "number" and not unitless($value) {
+    @return $value / ($value * 0 + 1);
+  }
+  @return $value;
+}
+
+
+//  get-unit()
+//  This function takes a measurement and returns the unit of measurement as a string.
+//
+//  $value: a numeric value, with or without a unit, and the desired unit.
+
+
+@function get-unit($value) {
+  @if type-of($value) == "number" and unitless($value) {
+    @return "";
+  } @else if type-of($value) == "number" {
+    @return unit($value);
+  }
+}
+
+//  to-unit()
+//  This function takes a fixed width measurement and converts it to a new unit of measurement.
+//
+//  $value: a numeric value, with or without a unit, and the desired unit.
+//  $to-unit: Supported unit to convert to. Supported units are currently rem and em. Default is set to rem.
+//  $type-base: base font size (pixel value) used to calculate the rem value.
+//
+
+@function to-unit($value: $type-base, $to-unit: "rem", $type-base: $type-base) {
+  $stripped-base: strip-unit($type-base);
+  $stripped-value: strip-unit($value);
+  $from-unit: get-unit($value);
+  @if $from-unit == "%" or $from-unit == "vh" or $from-unit == "vw" or $from-unit == "vmin" {
+    // Ignore fluid units of measurement
+    @warn "You entered a fluid width of #{$value}. Please use a fixed width unit or use calc() isntead.";
+    @return $value;
+  } @else if $from-unit == "cm" or $from-unit == "mm" or $from-unit == "ex" or $from-unit == "in" or $from-unit == "pc" or $from-unit == "pt" or $from-unit == "pt" {
+    // Ignore non-standard units of measurement
+    @error "While "#{$from-unit}" is a valid CSS unit of measurement, for consistency please use one of the following with this function: px, rem, em.";
+    // @return $value;
+  }
+  // Check the unit that the input value needs to be converted to.
+  @if $to-unit == "rem" or $to-unit == "em" {
+    // Determine how to calculate the output based on the unit of the input value.
+    @if $from-unit == "rem" or $from-unit == "em" {
+      @return $stripped-value * 1#{$to-unit};
+    }
+    @if $from-unit == "px" or $from-unit == "" {
+      @return $stripped-value/$stripped-base * 1#{$to-unit};
+    }
+  }
+  // If the value doesn't fit the criteria, just return it.
+  @return $value;
+}
+
+  // ------------------------ //
+ //  Type Setting and Scale  //
+// ------------------------ //
+
+//  ts()
+//  This is a utility function that can be used to dynamically calculate a typescale using a $ratio and $level.
+//
+//  $ratio: the ratio to increase the font size by when calculating it's power value.
+//  $level: representive of the value of the fonts distance from the base (0 == 1rem == 16px).
+//          Used to as the $exponent value when when calculating the $ratio's power value.
+
+@function ts($level: 0, $to-unit: "rem", $ts-ratio: $ts-ratio){
+  @return pow($ts-ratio, $level) * 1#{$to-unit};
+};
+
+//  type-scale()
+//  This function accesses a defined set of maps.
+//  Should be used when defining a custom type scale outside of a modular/dynamic type-scale.
+//
+//  $scale: The name of the type scale map to be accessed.
+//  $level: The level (or key) to access from the map. Should ALWAYS be numeric to align with the ts() function.
+
+@function type-scale($scale, $level) {
+    @return map-get(map-get($__type-scale, $scale), $level);
+};
+
+@function font-weight($weight) {
+  @return map-get($__font-weight, $weight);
+}

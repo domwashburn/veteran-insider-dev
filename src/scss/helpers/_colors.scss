@@ -1,0 +1,219 @@
+// ==========================================================================
+// = Global Variables
+// ==========================================================================
+
+// UI Colors
+$color-primary          : color("blue",90);
+$color-secondary        : color("blue",80);
+$color-tertiary         : color("blue",70);
+$color-tertiary-light   : color("blue",10);
+
+$color-medium           : color("gray", 50);
+
+$color-white            : color("white",core);
+$color-light            : color("cool white",20);
+$color-light-secondary  : color("gray",10);
+$color-light-tertiary   : color("gray",30);
+$color-light-gray       : color("gray", 20);
+$color-dark-gray        : color("gray", 60);
+
+//Accent Colors
+
+$color-accent                 : color("magenta",60);
+$color-accent-light           : color("magenta",50);
+$color-accent-invert          : color("teal",40);
+$color-accent-invert-light    : color("teal",30);
+$color-accent-invert-lighter  : color("teal",20);
+
+$color-accent-dark            : color("magenta", 70);
+
+//Status Colors
+$color-success           : color("green", 50);
+$color-success-dark      : color("green", 30);
+$color-warning           : color("yellow", 20);
+$color-error             : color("red", 50);
+$color-info              : color("blue", 50);
+$color-info-dark         : color("blue", 20);
+
+//Type Colors
+$color-text                : $color-secondary;
+$color-text-invert         : $color-light;
+
+// Button colors
+$color-button               : $color-accent;
+$color-button-light         : $color-accent-invert;
+$color-button-dark          : $color-accent-invert-light;
+$color-button-disabled      : $color-light-tertiary;
+$color-button-dark-disabled : $color-medium;
+
+// Checkbox Colors
+$color-checkbox                :$color-accent;
+$color-checkbox-border         :$color-secondary;
+$color-checkbox-disabled       : $color-light-tertiary;
+$color-checkbox-dark           : $color-accent-invert-light;
+$color-checkbox-dark-border    : $color-light;
+$color-checkbox-dark-disabled  : $color-medium;
+
+// Radio Colors
+$color-radio                : $color-accent;
+$color-radio-border         : $color-secondary;
+$color-radio-disabled       : $color-light-tertiary;
+$color-radio-dark           : $color-accent-invert-light;
+$color-radio-dark-border    : $color-light;
+$color-radio-dark-disabled  : $color-medium;
+
+// Select Box Colors
+$color-select               : $color-accent;
+$color-select-bg            : $color-light-secondary;
+$color-select-option        : $color-secondary;
+$color-select-hover         : $color-white;
+
+$color-select-dark          : $color-accent-invert-light;
+$color-select-bg-dark       : $color-tertiary;
+$color-select-option-dark   : $color-light;
+$color-select-dark-hover    : $color-primary;
+
+//Focus
+$color-focus                : rgba(color("blue",20), 0.75);
+$color-focus-disabled       : rgba(color("blue",20), 0.75);
+$color-focus-dark           : rgba(color("blue",50), 0.75);
+$color-focus-dark-disabled  : rgba(color("blue",20), 0.75);
+
+
+// Search Colors
+$color-search                           : $color-medium;
+$color-search-placeholder               : $color-medium;
+$color-search-border                    : $color-medium;
+$color-autocomplete                     : $color-secondary ;
+$color-autocomplete-focus               : $color-accent ;
+$color-autocomplete-background          : $color-light-secondary;
+$color-autocomplete-background-focus    : $color-white;
+
+
+$color-search-dark                        : $color-light-tertiary;
+$color-search-placeholder-dark            : $color-light-tertiary;
+$color-search-border-dark                 : $color-light-secondary;
+$color-autocomplete-dark                  : $color-light ;
+$color-autocomplete-focus-dark            : $color-accent-invert-light;
+$color-autocomplete-background-dark       : $color-tertiary;
+$color-autocomplete-background-focus-dark : $color-primary;
+
+
+
+
+// Slider Colors
+$color-slider-right             :$color-light-secondary;
+$color-slider-left              :$color-accent;
+$color-slider-front             :$color-accent-dark;
+$color-slider-disabled          :$color-light-tertiary ;
+
+$color-slider-right-dark        :$color-light-tertiary;
+$color-slider-left-dark         :$color-accent-invert-light;
+$color-slider-front-dark        :$color-accent-invert;
+$color-slider-disableda         :color("gray",60);
+$color-slider-disabledb         :$color-medium;
+
+// Table Colors
+$table-background             :$color-white;
+$table-title                  :$color-secondary;
+$table-subtitle               :color("gray",core);
+$table-border1                :$color-light-secondary;
+$table-border2                :$color-light-gray;
+$table-first-column           :$color-light-secondary;
+$table-text                   :color("gray",core);
+$table-hover-background       :rgba(color("gray",10),0.2);
+$table-hover-top              :$color-primary;
+
+// Text Field Colors
+$color-textfield            : color("gray", 60);
+$color-textfield-border     : $color-medium;
+$color-textfield-focus      : $color-secondary;
+
+$color-textfield-dark       : $color-light-gray;
+$color-textfield-border-dark: $color-light-tertiary;
+$color-textfield-dark-focus : $color-light;
+
+$color-validation-info      : $color-secondary;
+$color-validation-info-dark : $color-light;
+
+// Toggle Colors
+$color-toggle-on             :$color-accent;
+$color-toggle-off            :$color-light-tertiary;
+$color-toggle-front          :$color-white;
+$color-toggle-check          :$color-light;
+$color-toggle-disabled       :$color-light-tertiary;
+$color-toggle-on-dark             :$color-accent-invert-light;
+$color-toggle-off-dark            :$color-light-tertiary;
+$color-toggle-front-dark          :$color-tertiary;
+$color-toggle-check-dark          :$color-primary;
+$color-toggle-disabled-dark       :$color-medium;
+
+
+// Gradients
+$light-gradient                 :repeating-linear-gradient(45deg, color("grey",20),color("grey",20) 2px, color("grey",30) 2px, color("grey",30) 8px);
+$dark-gradient                  :repeating-linear-gradient(45deg, color("grey",60),color("grey",60) 2px, color("grey",50) 2px, color("grey",50) 8px);
+
+
+// Links
+$color-link                   : $color-accent;
+$color-link-hover             : $color-accent;
+$color-link-active            : $color-accent-light;
+$color-link-dark              : $color-accent-invert-light;
+$color-link-hover-dark         : $color-accent-invert-light;
+$color-link-active-dark       : $color-accent-invert-lighter;
+
+// Base Sizes
+// ==========
+
+$base-font-size               : 16px;
+$large-font-size              : 22px;
+
+$base-line-height             : 1.68;
+
+
+// Font Stacks
+// ===========
+
+$font-family-default          : "Helvetica Neue for IBM", "Helvetica Neue", Helvetica, Arial, Roboto, sans-serif;
+
+$font-family-monospace        : "Source Code Pro", Lucida Console, Andale Mono, monospace;
+
+
+// Font Weights
+// ============
+
+$font-weight-light            : 300;
+$font-weight-normal           : 400;
+$font-weight-semibold         : 500;
+$font-weight-bold             : 700;
+
+/**
+ * Define z-indexes for various elements
+ * @link http://www.sitepoint.com/using-sass-maps/
+ * @type number
+ */
+
+// z-index reference
+$zindex: (
+  modal                       : 9000,
+  overlay                     : 8000,
+  dropdown                    : 7000,
+  header                      : 6000
+);
+
+// Transitions
+// ============
+
+$transition-default           :all 0.2s ease-in-out;
+$transition-nav               :all .25s ease-in-out;
+
+//Used for Drop Downs
+$ibm-bezier                   :cubic-bezier(.5, .08, 0, 1);
+
+$button-speed                 :$transition-default;
+$button-speed--faster         :all 0.1s ease-in-out;
+
+// Shadow
+// ============
+
+$shadow-default:               0px 2px 2px 0px rgba(0,0,0,0.1);

@@ -1,0 +1,204 @@
+@mixin button() {
+  align-items: center;
+  box-sizing: border-box;
+  background-color: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: HelvNeueMediumforIBM;
+  height: 100%;
+  margin: 0;
+  padding-top: .8em;
+  padding-bottom: .8em;
+  padding-left: 1em;
+  padding-right: 1em;
+  transition:
+      width 250ms ease-out,
+      fill 250ms ease-out,
+      color 250ms ease-out,
+      background-color 200ms ease-out,
+      border-color 200ms ease-out;
+}
+
+.button {
+	@include button();
+    &:hover {
+    	transition:
+    		fill 250ms ease-out,
+    		color 250ms ease-out,
+    		background-color 200ms ease-out,
+    		border-color 200ms ease-out;
+    }
+    :first-child:not(:only-child) {
+    	padding-right: 0.8em;
+    }
+    &__text {
+        flex: 1;
+    }
+    &__text-center {
+        text-align: center;
+    }
+    &--ghost {
+    		@include button();
+    	    border-width: 2px;
+    	    border-style: solid;
+    }
+    &--fill {
+    	@include button();
+    	&:hover {
+    		transition:
+    			fill 250ms ease-out,
+    			background-color 200ms ease-out,
+    			border-color 200ms ease-out;
+    	}
+    	&:active {
+    		transition:
+    			fill 150ms ease-out,
+    			background-color 200ms ease-out;
+    	}
+    }
+    &--inline {
+    	@include button();
+		line-height: 36px;
+		margin: 0;
+		padding: 0 1em 0 0.5em;
+		border-top: 0;
+		border-left: 0;
+		border-right: 0;
+		background-color: initial;
+		color: #FFF;
+		outline: none;
+	}
+}
+
+.light-ui {
+	.button--ghost {
+		color: palette("light-ui", "active");
+		fill: palette("light-ui", "active");
+		background-color: transparent;
+		border-color: palette("light-ui", "active");
+		&:hover, &:active {
+			background-color: palette("light-ui", "focus");
+			border-color: palette("light-ui", "focus");
+			color: palette("light-ui", "bg-light");
+			fill: palette("light-ui", "bg-light");
+		}
+	}
+	.is-open > .button--ghost, .is-open.button--ghost {
+		background-color: palette("light-ui", "active");
+		border-color: palette("light-ui", "active");
+		color: palette("light-ui", "bg-light");
+		fill: palette("light-ui", "bg-light");
+		&:hover, &:active {
+			background-color: palette("light-ui", "focus");
+			border-color: palette("light-ui", "focus");
+		}
+	}
+	// Because of selector specificity colors and transitions need to be redefined.
+
+	.button--fill  {
+		color: palette("light-ui", "active");
+		fill: palette("light-ui", "active");
+		background-color: transparent;
+		&:hover, &:active {
+			background-color: palette("light-ui", "focus");
+			color: palette("light-ui", "bg-light");
+			fill: palette("light-ui", "bg-light");
+			background-color: palette("light-ui", "focus");
+		}
+	}
+	.is-open > .button--fill, .is-open.button--fill{
+		color: palette("light-ui", "bg-light");
+		fill: palette("light-ui", "bg-light");
+		background-color: palette("light-ui", "active");
+		&:hover, &:active {
+			background-color: palette("light-ui", "focus");
+		}
+	}
+	.button--inline {
+		background-color: transparent;
+		color: palette("light-ui", "active");
+		fill: palette("light-ui", "active");
+		border-bottom: 3px solid palette("light-ui", "active");
+		&:hover, &:focus {
+		  color: palette("light-ui", "bg-light");
+		  fill: palette("light-ui", "bg-light");
+		  background-color: palette("light-ui", "focus");
+		  border-bottom: 3px solid palette("light-ui", "focus");
+		}
+	}
+	.is-open > .button--inline, .is-open.button--inline {
+		color: palette("light-ui", "bg-light");
+		border-bottom: 3px solid palette("light-ui", "active");
+		&:hover, &:active {
+			background-color: palette("light-ui", "focus");
+			border-bottom: 3px solid palette("light-ui", "focus");
+		}
+	}
+}
+
+.dark-ui {
+	.button--ghost {
+		color: palette("dark-ui", "active");
+		fill: palette("dark-ui", "active");
+		background-color: transparent;
+		border-color: palette("dark-ui", "active");
+		&:hover, &:active {
+			background-color: palette("dark-ui", "focus");
+			border-color: palette("dark-ui", "focus");
+			color: palette("dark-ui", "bg-darker");
+			fill: palette("dark-ui", "bg-darker");
+		}
+	}
+	.is-open .button,>  open .button--ghost {
+		background-color: palette("dark-ui", "active");
+		border-color: palette("dark-ui", "active");
+		color: palette("dark-ui", "bg-darker");
+		fill: palette("dark-ui", "bg-darker");
+		&:hover, &:active {
+			background-color: palette("dark-ui", "focus");
+			border-color: palette("dark-ui", "focus");
+		}
+	}
+	// Because of selector specificity colors and transitions need to be redefined.
+
+	.button--fill  {
+		color: palette("dark-ui", "active");
+		fill: palette("dark-ui", "active");
+		background-color: transparent;
+		&:hover, &:active {
+			background-color: palette("dark-ui", "focus");
+			color: palette("dark-ui", "bg-darker");
+			fill: palette("dark-ui", "bg-darker");
+			background-color: palette("dark-ui", "focus");
+		}
+	}
+	.is-open > .button--fill, .is-open.button--fill{
+		color: palette("dark-ui", "bg-darker");
+		fill: palette("dark-ui", "bg-darker");
+		background-color: palette("dark-ui", "active");
+		&:hover, &:active {
+			background-color: palette("dark-ui", "focus");
+		}
+	}
+	.button--inline {
+		background-color: transparent;
+		color: palette("dark-ui", "active");
+		fill: palette("dark-ui", "active");
+		border-bottom: 3px solid palette("dark-ui", "active");
+		&:hover, &:focus {
+		  color: palette("dark-ui", "bg-darker");
+		  fill: palette("dark-ui", "bg-darker");
+		  background-color: palette("dark-ui", "focus");
+		  border-bottom: 3px solid palette("dark-ui", "focus");
+		}
+	}
+	.is-open > .button--inline, .is-open.button--inline {
+		color: palette("dark-ui", "bg-darker");
+		fill: palette("dark-ui", "bg-darker");
+		border-bottom: 3px solid palette("dark-ui", "active");
+		&:hover, &:active {
+			background-color: palette("dark-ui", "focus");
+			border-bottom: 3px solid palette("dark-ui", "focus");
+		}
+	}
+}

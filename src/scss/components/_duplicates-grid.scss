@@ -1,0 +1,40 @@
+
+.duplicates-grid {
+	&__actions {
+		flex-basis: to-unit(30px, "rem");
+		min-width: to-unit(30px, "rem");
+	}
+	&__id {
+		flex-basis: to-unit(100px, "rem");
+		min-width: to-unit(100px, "rem");
+	}
+	&__record {
+		flex: 1;
+	    min-width: 9.25rem;
+	}
+	&__duplicates {
+		flex: 1;
+		&-indicator {
+			margin-right: 1.2em;
+			height: 0.76em;
+		}
+	}
+	&__matches {
+		flex: 1;
+		min-width: 9.25rem;
+	}
+	&__details {
+		flex-basis: to-unit(50px, "rem");
+	    min-width: 6.125rem;
+	    transition: opacity 150ms ease-in;
+	    .grid__row & {
+	    	opacity: 0;
+	    }
+	    .grid__row:hover &, .grid__row.is-active & {
+	    	opacity: 1;
+	    }
+	}
+	.copy--info {
+		padding-right: 1.2em;
+	}
+}

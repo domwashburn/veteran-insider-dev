@@ -1,0 +1,238 @@
+@mixin grid-row() {
+  border-bottom: 1px solid palette("secondary", "light");
+  background-color: transparent;
+  overflow: hidden;
+  transition: background-color 200ms ease-in;
+  display: flex;
+  flex-flow: row nowrap;
+  position: relative;
+}
+
+.grid {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+	width: 100%;
+
+	&__row
+  &__head,
+  &__cell-group {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		height: to-unit(40px, "rem");
+		padding: 0 to-unit(30px, "rem");
+	}
+
+  // ROW TYPES
+
+	&__row {
+		@include grid-row();
+		&.is-active {
+			background-color: #F7F7F7;
+			transition: background-color 200ms ease-in;
+			&:hover {
+				background-color: #F1F1F1;
+			}
+		}
+	}
+	&__row-scroll {
+		@include grid-row();
+		display: inline-flex;
+		padding: 0;
+	}
+	&__head {
+		border-bottom: 2px solid palette("secondary", "light");
+	}
+	&__header-row {
+		position: relative;
+	}
+	&__section-header {
+		height: to-unit(30px, "rem");
+		background-color: #E0E0E0;
+		width: 100%;
+		position: relative;
+		// & + * {
+		// 	margin-top: 30px;
+		// }
+
+		.grid__row-header {
+            background-color: #E0E0E0;
+            position: initial;
+        }
+	}
+
+	/*
+	** grid content group styling
+	*/
+	&__row-group {
+		overflow: scroll;
+	    transition: height 200ms cubic-bezier(0.35, 1.13, 0.88, 1.13);
+		.grid__row {
+			background-color: #F7F7F7;
+			&:hover {
+				background-color: #F1F1F1;
+			}
+			&:last-child {
+				border-bottom: 0;
+			}
+		}
+		&.is-open {
+			border-bottom: 1px solid palette("secondary", "light");
+		}
+		&.is-closed {
+			    height: 0;
+		}
+	}
+
+	&__header-group {
+		overflow-x: scroll;
+		border-top: 1px solid palette("secondary", "light");
+		&::-webkit-scrollbar {
+	        display: none;
+	    }
+	}
+	&__cell-group:only-of-type {
+		flex: 1;
+	}
+	&__cell-group {
+		padding: 0;
+	}
+	&__body {
+		// border-top: 1px solid palette("secondary", "medium"); //this is only 2 px on scroll, shouldn"t exist until then :)
+        overflow: scroll;
+        height: 200px;
+    }
+	/*
+	** cell types
+	*/
+	&__cell, &__col-header {
+	    padding: 0 to-unit(10px, "rem");
+	    height: 100%;
+	    align-items: center;
+	    display: flex;
+	    // background-color: #FFFFFF; // TO DO: move this to row and ui theme
+		.grid__row > &:first-child,
+		.grid__head > &:first-child {
+			padding: 0 to-unit(10px, "rem") 0 0;
+		}
+		.grid__row > &:last-child,
+		.grid__head > &:last-child {
+			padding: 0 0 0 to-unit(10px, "rem");
+		}
+	}
+	&__cell-fixed {
+		padding: 0 px-rem(29.2);
+	    height: 100%;
+	    align-items: center;
+	    display: flex;
+		width: 160px;
+		overflow: hidden;
+		transition: width 350ms ease-out, box-shadow 150ms 150ms ease-in;
+		// border-right: 1px solid #333; // just for testing
+		&.grid__row-header.is-stuck {
+			padding: 0 to-unit(10px, "rem");
+		}
+	}
+
+	&__col-header {
+		.icon--sort {
+			opacity: 0;
+			padding: 0 0 0 0.8em;
+		}
+		&:hover .icon--sort {
+			opacity: 1;
+		}
+		&.is-active .icon--sort {
+			opacity: 1;
+		}
+	}
+
+	&__row-header {
+		&.is-stuck {
+			box-shadow: 0 0 126px -1px rgba(#333, .2); // dropshadow for subtle depth
+			// float: left;
+        	// position: absolute;
+        	// z-index: 5;
+        	width: 50px;
+	        overflow: hidden;
+	        border-right: 1px solid palette("secondary", "light");
+	        // top: 0;
+	        background-color: palette("light-ui", "bg-lighter");
+	        transition: width 350ms ease-out, box-shadow 150ms 150ms ease-in;
+			& > * {
+				flex: 1;
+				text-align: center;
+				padding: 0;
+			}
+			& + .grid__cell-group {
+		        margin-left: to-unit(50px, "rem");
+		    }
+		}
+	}
+}
+
+.semantic-group__item {
+    position: relative;
+    padding-top: .75em;
+    padding-bottom: .75em;
+    z-index: 1;
+    &:before {
+	    content: " ";
+	    position: absolute;
+	    background-color: rgba(palette("neutrals", "4"), 0.55);
+        z-index: -1;
+        height: 100%;
+        transform: translateY(-50%);
+        top: 50%;
+	}
+}
+//highlighting group
+.semantic-group--start {
+    width: 100%;
+    &:before {
+        width: 100%;
+        padding-left: 3.2em;
+        transform: translateY(-50%) translateX(-1em);
+        // background-color: #BEF17D;
+    }
+}
+.semantic-group--middle {
+    width: 100%;
+    &:before {
+        width: 100%;
+        padding-left: 4.4em;
+        transform: translateY(-50%) translateX(-2.1em);
+        // background-color: #8CFFD9;
+    }
+}
+.semantic-group--end {
+    // position: relative;
+    // width: auto;
+    &:before {
+        padding-left: 3.2em;
+        transform: translateY(-50%) translateX(-2.1em);
+        min-width: 100%;
+        max-width: 100%;
+        // background-color: #FDC4FF;
+    }
+}
+.semantic-group--only {
+    width: auto;
+    &:before {
+        padding-left: 1.8em;
+        transform: translateY(-50%) translateX(-0.9em);
+        min-width: 100%;
+        max-width: 100%;
+        // background-color: #FFDBA5;
+    }
+}
+
+.is-sticky {
+
+}
+
+.is-stuck {
+}
+

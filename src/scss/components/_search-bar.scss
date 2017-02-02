@@ -1,0 +1,11 @@
+.search-bar {
+    display: flex;
+    height: to-unit(30px, "rem");
+}
+
+.light-ui {
+    .search-bar {
+        background-color: palette("light-ui", "bg-light");
+        border-bottom: 1px solid palette("secondary", "light");
+    }
+}

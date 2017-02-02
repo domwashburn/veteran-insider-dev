@@ -1,0 +1,9 @@
+@import "type-setting";
+
+@function palette($palette, $color) {
+  @return map-get(map-get($__palette, $palette), $color);
+}
+
+@function layer($layer-number) {
+  @return map-get($__z-index-stack, $layer-number);
+}

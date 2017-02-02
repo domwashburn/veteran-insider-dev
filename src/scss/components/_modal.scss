@@ -1,0 +1,125 @@
+.modal {
+    //currently this is over-riding the data connect .modal class
+    // display: none;
+    display: flex;
+    &.is-visible {
+        z-index: 999;
+    }
+    &.is-invisible {
+        visibility: hidden;
+        // z-index: -10;
+    }
+    &__wrapper {
+        display: flex;
+        flex-direction: row;
+        width: 100vw;
+        height: 100vh;
+        justify-content: center;
+        background-color: rgba( palette("base", "bg-darker"), 0.9);
+        position: absolute;
+        top: 0;
+        @include layer("top");
+        // backdrop-filter: blur(7px) grayscale(75%); // really cool effect that blurs the content behind the element... not available in all browsers though
+    }
+    &__inner {
+        align-self: center;
+        position: relative;
+        width: 60vw;
+        height: 60vh;
+        overflow: hidden;
+        @media ( max-width: 1600px) {
+            width: 960px;
+        }
+        @media ( max-width: 875px) {
+            width: 100%;
+            min-width: 90vw;
+            max-width: 100%;
+            margin: 20px 20px 0 20px;
+            transition: width min-width 200ms ease-in;
+          }
+    }
+    &__header {
+        position: relative;
+        padding: 50px 50px 0;
+    }
+    &__tabs {
+        padding: 0 40px;
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+    }
+    &__close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+    &--from-bottom {
+        align-self: flex-end;
+        position: relative;
+        height: 92vh;
+        margin-left: 30px;
+        margin-right: 30px;
+        align-self: flex-end;
+        animation: enter-bottom 500ms 200ms ease-in-out both;
+        .is-visible & { }
+        .is-invisible & { animation: enter-bottom 500ms 200ms ease-in-out reverse both; }
+
+    }
+    &__info {
+        padding: to-unit(25px, "rem") to-unit(50px, "rem");
+        // border-bottom-style: solid;
+        // border-bottom-width: 1px;
+    }
+    &__body {
+        display: flex;
+        flex-direction: column;
+        padding: to-unit(40px, "rem") to-unit(50px, "rem") 0;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        // &--full {
+        //     @extend .modal__body;
+        //     padding: 0;
+        // }
+    }
+}
+
+// @keyframes enter-bottom {
+//     0% { transform: translateY(100px) scaleY(.8); opacity: 0;}
+//     25% { transform: translateY(-5px) scaleY(1.02); opacity: 1; }
+//     100% { transform: translateY(0) scaleY(1) }
+// }
+
+@keyframes enter-bottom {
+    0% {
+        transform-origin: top center;
+        opacity: 0;
+        bottom: -30vh;
+    }
+    20% { opacity: 1; }
+    42% { height: 94vh; }
+    65% { bottom: 0px; }
+    100% {}
+}
+
+
+.entity-modal__body {
+    flex-direction: row-reverse;
+}
+
+.light-ui {
+    .modal, &.modal {
+        &__tabs {
+            border-bottom-color: palette("secondary", "light");
+        }
+        &__inner {
+            border-top: 6px solid palette("light-ui", "active");
+            background-color: white;
+        }
+        &__header {
+            background-color: palette("light-ui", "bg-light");
+        }
+         &__info {
+            background-color: palette("light-ui", "bg-light");
+            // border-bottom-color: palette("secondary", "light");
+        }
+    }
+}

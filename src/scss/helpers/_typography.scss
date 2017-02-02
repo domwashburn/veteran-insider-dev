@@ -1,0 +1,198 @@
+body {
+    font-family: $font-stack;
+}
+
+.title {
+  &--micro {
+    // color: palette("secondary", "med");
+    // color: #6d7777;
+    font-size: type-scale("desktop", -3);
+    font-weight: font-weight("roman");
+    text-transform: uppercase;
+    line-height: 1rem;
+    padding-bottom: 0.33rem;
+    // letter-spacing: .25rem;
+  }
+  &--xs {
+    font-size: type-scale("desktop", -2);
+    font-weight: font-weight("roman");
+  }
+  &--sm {
+    font-size: type-scale("mobile", 0);
+    transition: font-size 300ms cubic-bezier(0.1, 60.0, 10.4, 91.12);
+    @media (min-width: 500px) {
+      transition: font-size 300ms cubic-bezier(0.1, 60.0, 10.4, 91.12);
+      font-size: type-scale("desktop", 0);
+    }
+  }
+  &--md {
+    font-size: type-scale("mobile", 1);
+    transition: font-size 300ms cubic-bezier(0.1, 60.0, 10.4, 91.12);
+    @media (min-width: 500px) {
+      transition: font-size 300ms cubic-bezier(0.1, 60.0, 10.4, 91.12);
+      font-size: type-scale("desktop", 1);
+    }
+  }
+  &--lg {
+    font-size: type-scale("mobile", 2);
+    transition: font-size 300ms cubic-bezier(0.1, 60.0, 10.4, 91.12);
+    @media (min-width: 500px) {
+      transition: font-size 300ms cubic-bezier(0.1, 60.0, 10.4, 91.12);
+      font-size: type-scale("desktop", 2);
+    }
+  }
+}
+
+@mixin body-copy() {
+  letter-spacing: 0.04em;
+  line-height: 1.65rem;
+}
+
+.body-copy {
+  &--xs {
+    @include body-copy();
+    color: palette("secondary", "dark");
+    font-size: type-scale("desktop", -1);
+  }
+  &--sm {
+    @include body-copy();
+    color: palette("secondary", "dark");
+    font-size: type-scale("desktop", 0);
+  }
+}
+
+.copy {
+  // copy sizing
+  &--micro {
+    font-size: type-scale("desktop", -3);
+    font-weight: font-weight("roman");
+    line-height: 1.33rem;
+    letter-spacing: .15rem;
+  }
+  &--sm {
+    font-size: type-scale("desktop", -1);
+    line-height: 1.33rem;
+    // padding-bottom: 0.66rem;
+    font-weight: font-weight("roman");
+  }
+  &--md {
+    font-size: type-scale("mobile", 0);
+    line-height: 1.33rem;
+    padding-bottom: 0.66rem;
+    // font-weight: font-weight("roman");
+  }
+  &--body {
+    font-size: type-scale("desktop", 0);
+    line-height: 1.33rem;
+    padding-bottom: 0.66rem;
+    font-weight: font-weight("light");
+  }
+  &--table {
+    font-size: type-scale("desktop", -1);
+    color: palette("secondary", "dark");
+    white-space: nowrap;
+    // font-weight: font-weight("roman");
+  }
+  &--tool-tip {
+    font-size: type-scale("desktop", -2);
+    font-weight: font-weight("roman");
+  }
+  // copy weights
+  &--roman {
+    @include font-weight-style("roman");
+  }
+  &--medium {
+    @include font-weight-style("medium");
+  }
+  &--bold {
+    @include font-weight-style("bold");
+  }
+  // copy specific to status
+  &--info,  &--success,  &--warn,  &--error {
+    @include font-weight-style("roman");
+  }
+}
+
+.key-value-list {
+  &__item {
+    margin-bottom: to-unit(12px, "rem");
+    display: flex;
+  }
+  &__key, &__value {
+    display: inline-block;
+    line-height: 1.33;
+  }
+  &__key {
+    width: 200px;
+    word-break: break-all;
+    margin-right: 1em;
+  }
+  &__value {
+    min-width: 100px;
+    color: palette("secondary", "dark");
+    word-break: break-word;
+  }
+}
+
+// one off copy: this isn"t ideal ...
+.table-header {
+    display: inline-block;
+    font-size: type-scale("desktop", -2);
+    font-weight: font-weight("bold");
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: palette("base", "text");
+}
+
+.fraction {
+  display: flex;
+  align-items: baseline;
+  color: #6d7777;
+  font-size: type-scale("desktop", 0);
+  font-weight: font-weight("light");
+  &__numerator--lg  {
+    font-weight: font-weight("light");
+    font-size: type-scale("desktop", 1);
+    color: palette("light-ui", "info");
+    display: inline-block;
+    & .fraction__divider {
+      font-size: 1.25em;
+      transform: translateY(0.12em);
+    }
+  }
+  &__divider {
+    font-size: 2em;
+    transform: translateY(0.2em);
+    display: inline-block;
+    margin-right: 0.2em;
+    margin-left: 0.2em;
+    color: #AEB8B8;
+    font-family: "Helvetica Neue";
+    font-weight: 100;
+  }
+  &--display {
+    @extend .fraction;
+    letter-spacing: .1rem;
+  }
+}
+
+.light-ui {
+  color: palette("light-ui", "text");
+  .copy--info {
+    color: palette("light-ui", "info");
+  }
+  .copy--success {
+    color: palette("light-ui", "success");
+  }
+  .copy--warn {
+    color: palette("light-ui", "warn");
+  }
+  .copy--error {
+    color: palette("light-ui", "error");
+  }
+}
+.dark-ui {
+  color: palette("dark-ui", "text");
+}
